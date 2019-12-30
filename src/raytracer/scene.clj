@@ -5,24 +5,26 @@
 (defrecord Light [position intensity])
 
 (def apple-green (->Material [0.25 1.0 0] 0.4 0.2))
-(def cherry-red (->Material [1.0 0 0.25] 0.4 0.6))
-(def mustard-yellow (->Material [0.85 1.0 0] 0.4 0.4))
+(def red-rubber (->Material [0.3 0.1 0.1] 0.9 0.1))
+(def ivory (->Material [0.4 0.4 0.3] 0.6 0.3))
 
-(def scene {:spheres [(->Sphere [-2 4 -7.5]
-                                1
-                                apple-green)
+(def scene {:spheres [(->Sphere [-3 0 -16]
+                                2
+                                ivory)
 
-                      (->Sphere [0.5 0 -5.0]
-                                1
-                                cherry-red)
+                      (->Sphere [-1.0 -1.5 -12]
+                                2
+                                red-rubber)
 
-                      (->Sphere [-0.9 -0.9 -8.8]
+                      (->Sphere [1.5 -0.5 -18]
                                 3
-                                mustard-yellow)
+                                red-rubber)
 
-                      (->Sphere [1.5 2 -4.0]
-                                1
-                                cherry-red)]
+                      (->Sphere [7 5 -18]
+                                4
+                                ivory)]
 
-            :lights [(->Light [-15 -10 30] 1.1)
-                     (->Light [3 -40 14] 0.8)]})
+            :lights [(->Light [-20 20 30] 1.1)
+                     (->Light [30 50 -25] 1.8)
+                     (->Light [30 20 30] 1.7)
+                     ]})

@@ -8,8 +8,8 @@
   (:gen-class))
 
 (declare paint im-panel)
-(def width 500)
-(def height 500)
+(def width 384)
+(def height 384)
 (def buf-im (BufferedImage. width height BufferedImage/TYPE_INT_ARGB))
 
 ; FIXME: I don't really know anything about how swing works, so there's
