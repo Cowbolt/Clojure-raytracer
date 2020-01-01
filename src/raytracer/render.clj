@@ -19,15 +19,13 @@
          lights (:lights scene)]
     (if (empty? lights)
       (+ (* dif-tot (:dif mat)) (* spec-tot (:spec mat)))
-
+      ; (/ (Math/floor (* 4 (+ (* dif-tot (:dif mat)) (* spec-tot (:spec mat))))) 4) ; Posterization
       (let [light (first lights)
-            light-dir (utils/normalize (map - (:position light) point))
-            light-dist (utils/norm (map - (:position light) point))]
-
-        ; Check if light is blocked by any other elements in our scene. If so, skip it.
+            light-dir (utils/normalize (map - (:position light) point))]
+            ; light-dist (utils/norm (map - (:position light) point))]
+        ; Check if light is blocked by any other elements in our scene. If so, skip it.]
         (if (> (first (scene-intersect scene (->Ray point light-dir))) 0)
           (recur dif-tot spec-tot (rest lights))
-
           (let [dif-l (max 0 (* (utils/dot light-dir normal) (:intensity light)))
                 spec-l (* (Math/pow (max 0 (utils/dot (reflect light-dir normal) dir)) 64) (:intensity light))]
             (recur (+ dif-tot dif-l) (+ spec-tot spec-l) (rest lights))))))))
@@ -55,7 +53,7 @@
                              (map vector (:spheres scene))
                              (filter #(pos? (last %))))]
     (if (empty? sphere-dist-vec)
-      [-1 0 0 [0 0 0]] ; No valid intersections
+      [-1 0 0 [0 0 0]] ; No valid intersections ; FIXME: Return just -1?
       (let [[sphere dist] (apply min-key #(min (last %)) sphere-dist-vec) ; Get closest intersection
             point (map #(* dist %) (:direction ray))
             normal (utils/normalize (map - point (:center sphere)))]

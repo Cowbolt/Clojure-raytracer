@@ -1,12 +1,12 @@
 (ns raytracer.scene)
 
-(defrecord Material [color dif spec])
+(defrecord Material [color dif spec reflect])
 (defrecord Sphere [center radius material])
 (defrecord Light [position intensity])
 
-(def apple-green (->Material [0.25 1.0 0] 0.4 0.2))
-(def red-rubber (->Material [0.3 0.1 0.1] 0.9 0.1))
-(def ivory (->Material [0.4 0.4 0.3] 0.6 0.3))
+(def apple-green (->Material [0.25 1.0 0] 0.4 0.2 0.6))
+(def red-rubber (->Material [0.3 0.1 0.1] 0.9 0.1 0.0))
+(def ivory (->Material [0.4 0.4 0.3] 0.6 0.3 0.0))
 
 (def scene {:spheres [(->Sphere [-3 0 -16]
                                 2
