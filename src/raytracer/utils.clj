@@ -8,7 +8,10 @@
 (defn norm 
   "Norm of vector"
   [a]
-  (Math/sqrt (reduce + (map #(Math/pow % 2) a))))
+  (->> a
+       (map #(Math/pow % 2))
+       (reduce +)
+       (Math/sqrt)))
 
 (defn normalize
   "Normalize vector"
